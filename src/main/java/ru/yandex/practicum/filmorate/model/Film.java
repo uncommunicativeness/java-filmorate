@@ -1,17 +1,22 @@
 package ru.yandex.practicum.filmorate.model;
 
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import ru.yandex.practicum.filmorate.model.validators.ReleaseDateConstraint;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Builder
-public class Film extends StorageData {
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+public class Film extends AbstractData {
 
     @NotBlank(message = "Название фильма не может быть пустым")
     private String name;
@@ -24,4 +29,20 @@ public class Film extends StorageData {
 
     @Positive(message = "Продолжительность фильма должна быть положительной")
     private int duration;
+
+    @JsonIgnore
+    private Set<User> likes = new HashSet<>();
+
+    public void addLike(User user) {
+        likes.add(user);
+    }
+
+    public void removeLike(User user) {
+        likes.remove(user);
+    }
+
+    @JsonIgnore
+    public int getLikesCount() {
+        return likes.size();
+    }
 }
