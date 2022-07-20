@@ -6,7 +6,6 @@ import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.InMemoryAbstractDataStorage;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +25,7 @@ public class FilmService extends AbstractDataService<Film> {
 
     public List<Film> getPopularFilms(int count) {
         return new ArrayList<>(storage.findAll()).stream()
-                .sorted(Comparator.comparing(Film::getLikesCount, Comparator.reverseOrder()))
+                .sorted((o1, o2) -> o2.getLikes().size() - o1.getLikes().size())
                 .limit(count)
                 .collect(Collectors.toList());
     }

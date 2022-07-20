@@ -25,7 +25,7 @@ public abstract class InMemoryAbstractDataStorage<T extends AbstractData> implem
     }
 
     @Override
-    public Optional<T> find(int id) {
+    public Optional<T> findById(int id) {
         return Optional.ofNullable(storage.get(id));
     }
 
@@ -45,10 +45,5 @@ public abstract class InMemoryAbstractDataStorage<T extends AbstractData> implem
         storage.put(data.getId(), data);
 
         return Optional.of(data);
-    }
-
-    @Override
-    public Optional<T> delete(T data) {
-        return Optional.ofNullable(storage.remove(data.getId()));
     }
 }

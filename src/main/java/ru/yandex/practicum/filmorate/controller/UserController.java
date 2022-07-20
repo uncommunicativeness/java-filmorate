@@ -10,6 +10,7 @@ import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.AbstractDataService;
 import ru.yandex.practicum.filmorate.service.UserService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public class UserController extends AbstractController<User> {
     }
 
     @GetMapping("/{id}/friends")
-    public ResponseEntity<Set<User>> getFriends(@PathVariable int id) {
+    public ResponseEntity<List<User>> getFriends(@PathVariable int id) {
         Optional<User> optional = userService.findById(id);
         if (optional.isEmpty()) {
             throw new NotFoundException(String.format("Пользователь с id=%s не найден", id));

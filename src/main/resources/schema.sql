@@ -1,30 +1,3 @@
-```
- ________ ___  ___       _____ ______   ________  ________  ________  _________  _______      
-|\  _____\\  \|\  \     |\   _ \  _   \|\   __  \|\   __  \|\   __  \|\___   ___\\  ___ \     
-\ \  \__/\ \  \ \  \    \ \  \\\__\ \  \ \  \|\  \ \  \|\  \ \  \|\  \|___ \  \_\ \   __/|    
- \ \   __\\ \  \ \  \    \ \  \\|__| \  \ \  \\\  \ \   _  _\ \   __  \   \ \  \ \ \  \_|/__  
-  \ \  \_| \ \  \ \  \____\ \  \    \ \  \ \  \\\  \ \  \\  \\ \  \ \  \   \ \  \ \ \  \_|\ \ 
-   \ \__\   \ \__\ \_______\ \__\    \ \__\ \_______\ \__\\ _\\ \__\ \__\   \ \__\ \ \_______\
-    \|__|    \|__|\|_______|\|__|     \|__|\|_______|\|__|\|__|\|__|\|__|    \|__|  \|_______|
-```
-
-## Схема базы данных
-
-![](filmorate.png)
-
-## Дамп базы данных
-
-[Скачать](https://disk.yandex.ru/d/YsJnCJM7tbZsRg)
-
-### Развертывание дампа:
-
-```shell
-pg_restore -U user -d db filmorate.bak 
-```
-
-## Структура базы данных проекта
-
-```postgresql
 create table mpa_ratings
 (
     id   serial
@@ -200,47 +173,4 @@ comment on column likes.user_id is 'Идентификатор пользова�
 
 alter table likes
     owner to "user";
-```
 
-## Предварительное наполнение базы
-
-### Жанры
-
-```postgresql
-INSERT INTO public.genres (id, name)
-VALUES (1, 'Комедия');
-
-INSERT INTO public.genres (id, name)
-VALUES (2, 'Драма');
-
-INSERT INTO public.genres (id, name)
-VALUES (3, 'Мультфильм');
-
-INSERT INTO public.genres (id, name)
-VALUES (4, 'Триллер');
-
-INSERT INTO public.genres (id, name)
-VALUES (5, 'Документальный');
-
-INSERT INTO public.genres (id, name)
-VALUES (6, 'Боевик');
-```
-
-### Возрастной рейтинг
-
-```postgresql
-INSERT INTO public.mpa_ratings (id, name)
-VALUES (1, 'G');
-
-INSERT INTO public.mpa_ratings (id, name)
-VALUES (2, 'PG');
-
-INSERT INTO public.mpa_ratings (id, name)
-VALUES (3, 'PG-13');
-
-INSERT INTO public.mpa_ratings (id, name)
-VALUES (4, 'R');
-
-INSERT INTO public.mpa_ratings (id, name)
-VALUES (5, 'NC-17');
-```

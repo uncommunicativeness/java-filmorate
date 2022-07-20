@@ -5,6 +5,7 @@ import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.InMemoryAbstractDataStorage;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public class UserService extends AbstractDataService<User> {
         return super.create(data);
     }
 
-    public Set<User> getFriends(User user) {
+    public List<User> getFriends(User user) {
         return user.getFriends();
     }
 

@@ -23,7 +23,7 @@ public abstract class AbstractDataService<T extends AbstractData> {
     }
 
     public Optional<T> findById(int id) {
-        return storage.find(id);
+        return storage.findById(id);
     }
 
     public Optional<T> create(T data) {
@@ -32,9 +32,5 @@ public abstract class AbstractDataService<T extends AbstractData> {
 
     public Optional<T> update(T data) {
         return storage.update(data);
-    }
-
-    public Optional<T> delete(T data) {
-        return storage.delete(data);
     }
 }

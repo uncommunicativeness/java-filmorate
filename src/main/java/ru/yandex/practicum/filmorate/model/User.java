@@ -7,8 +7,8 @@ import ru.yandex.practicum.filmorate.model.validators.LoginConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,7 +28,7 @@ public class User extends AbstractData {
     private LocalDate birthday;
 
     @JsonIgnore
-    private Set<User> friends = new HashSet<>();
+    private List<User> friends = new ArrayList<>();
 
     public void addFriend(User friend) {
         friends.add(friend);

@@ -8,8 +8,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,8 +30,13 @@ public class Film extends AbstractData {
     @Positive(message = "Продолжительность фильма должна быть положительной")
     private int duration;
 
+    private MPARating rating;
+
     @JsonIgnore
-    private Set<User> likes = new HashSet<>();
+    private List<User> likes = new ArrayList<>();
+
+    @JsonIgnore
+    private List<Genre> genres = new ArrayList<>();
 
     public void addLike(User user) {
         likes.add(user);
@@ -39,10 +44,5 @@ public class Film extends AbstractData {
 
     public void removeLike(User user) {
         likes.remove(user);
-    }
-
-    @JsonIgnore
-    public int getLikesCount() {
-        return likes.size();
     }
 }
