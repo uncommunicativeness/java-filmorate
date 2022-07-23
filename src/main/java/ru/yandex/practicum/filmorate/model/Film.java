@@ -1,7 +1,10 @@
 package ru.yandex.practicum.filmorate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import ru.yandex.practicum.filmorate.model.validators.ReleaseDateConstraint;
 
 import javax.validation.constraints.NotBlank;
@@ -11,11 +14,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Data
+
+@SuperBuilder
+@RequiredArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Film extends AbstractData {
 
     @NotBlank(message = "Название фильма не может быть пустым")

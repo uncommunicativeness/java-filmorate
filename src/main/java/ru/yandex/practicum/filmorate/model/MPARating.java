@@ -1,12 +1,14 @@
 package ru.yandex.practicum.filmorate.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Data
+@SuperBuilder
+@RequiredArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class MPARating extends AbstractData {
     private String name;
 }

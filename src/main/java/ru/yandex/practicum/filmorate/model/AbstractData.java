@@ -1,10 +1,13 @@
 package ru.yandex.practicum.filmorate.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@Getter
-@Setter
+@Data
+@SuperBuilder
+@RequiredArgsConstructor
+//@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public abstract class AbstractData implements Comparable<AbstractData> {
     protected int id;
 

@@ -1,35 +1,44 @@
-package ru.yandex.practicum.filmorate.dao;
+package ru.yandex.practicum.filmorate.dao.impl;
 
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import ru.yandex.practicum.filmorate.dao.AbstractDataStorage;
 import ru.yandex.practicum.filmorate.model.AbstractData;
-import ru.yandex.practicum.filmorate.storage.AbstractDataStorage;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
+@Getter
+@Component
 public abstract class DataStorage<T extends AbstractData> implements AbstractDataStorage<T> {
     protected final JdbcTemplate jdbcTemplate;
 
-    protected String SQL_FIND_ALL;
-    protected String SQL_FIND_BY_ID;
-    protected String SQL_CREATE;
-    protected String SQL_UPDATE;
-    protected String SQL_DELETE;
+    private String sqlFindAll;
+    private String sqlFindById;
+    private String sqlCreate;
+    private String sqlUpdate;
+    private String sqlDelete;
 
+    @Autowired
     public DataStorage(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public Collection<T> findAll() {
-        return jdbcTemplate.query(SQL_FIND_ALL, this::mapRowToObject);
+        return jdbcTemplate.query(getSqlFindAll(), this::mapRowToObject);
     }
 
     @Override
     public Optional<T> findById(int id) {
-        List<T> results = jdbcTemplate.query(SQL_FIND_BY_ID, this::mapRowToObject, id);
+        List<T> results = jdbcTemplate.query(getSqlFindById(), this::mapRowToObject, id);
         return results.size() == 0 ?
                 Optional.empty() :
                 Optional.of(results.get(0));
@@ -41,7 +50,5 @@ public abstract class DataStorage<T extends AbstractData> implements AbstractDat
     @Override
     public abstract Optional<T> update(T data);
 
-    protected T mapRowToObject(ResultSet resultSet, int row) {
-        return null;
-    }
+    protected abstract T mapRowToObject(ResultSet resultSet, int row) throws SQLException;
 }

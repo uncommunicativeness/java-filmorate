@@ -1,7 +1,10 @@
 package ru.yandex.practicum.filmorate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import ru.yandex.practicum.filmorate.model.validators.LoginConstraint;
 
 import javax.validation.constraints.Email;
@@ -10,11 +13,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Data
+@SuperBuilder
+@RequiredArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class User extends AbstractData {
     @Email(message = "Электронная почта не может быть пустой и должна содержать символ @")
     private String email;
